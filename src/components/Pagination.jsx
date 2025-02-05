@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import React from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 const Pagination = ({ currentPage, totalPages, paginate }) => {
   return (
@@ -22,11 +22,17 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <p className="text-sm text-gray-700">
-          Showing <span className="font-medium">{(currentPage - 1) * 5 + 1}</span> to{' '}
-          <span className="font-medium">{Math.min(currentPage * 5, totalPages * 5)}</span> of{' '}
-          <span className="font-medium">{totalPages * 5}</span> results
+          Showing{" "}
+          <span className="font-medium">{(currentPage - 1) * 5 + 1}</span> to{" "}
+          <span className="font-medium">
+            {Math.min(currentPage * 5, totalPages * 5)}
+          </span>{" "}
+          of <span className="font-medium">{totalPages * 5}</span> results
         </p>
-        <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+        <nav
+          className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+          aria-label="Pagination"
+        >
           <button
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
@@ -40,8 +46,8 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
               onClick={() => paginate(idx + 1)}
               className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                 currentPage === idx + 1
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                  ? "bg-blue-500 text-white"
+                  : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
               }`}
             >
               {idx + 1}

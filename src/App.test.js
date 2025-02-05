@@ -1,9 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';  // Adjust the import path if needed
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders timesheet management system header', () => {
+test("renders learn react link", () => {
   render(<App />);
-  const headerElement = screen.getByText(/Welcome to the Timesheet Management System/i);
-  expect(headerElement).toBeInTheDocument();
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument(); // Ensure proper assertion
 });
-

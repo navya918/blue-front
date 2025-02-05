@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Card, Table, Button, Container } from 'react-bootstrap';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Card, Table, Button, Container } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const TimesheetSubmission = ({ setSubmissions }) => {
   const navigate = useNavigate();
@@ -17,27 +17,37 @@ const TimesheetSubmission = ({ setSubmissions }) => {
         SubmissionDate: new Date().toISOString(),
       };
 
-      const response = await axios.post("https://manibackendts-f7fee3fvgxdchebf.canadacentral-01.azurewebsites.net//api/timesheets", newFormData);
+      const response = await axios.post(
+        "https://manibackendts-f7fee3fvgxdchebf.canadacentral-01.azurewebsites.net//api/timesheets",
+        newFormData,
+      );
       console.log(response.data);
 
       // Add the new submission to the list of submissions
       setSubmissions((prev) => [...prev, response.data]);
-      navigate('/employee-home'); // Navigate to employee home page
-
+      navigate("/employee-home"); // Navigate to employee home page
     } catch (error) {
       console.log("Error submitting timesheet:", error);
-      setErrors(error.response?.data || 'Error occurred');
+      setErrors(error.response?.data || "Error occurred");
       console.log("Error response data:", error.response?.data);
     }
   };
 
   // Function to handle going back to the form
   const handleBackToForm = () => {
-    navigate('/timesheet-management', { state: { formData } });
+    navigate("/timesheet-management", { state: { formData } });
   };
 
   // Destructure submissionData and prepare for rendering
-  const { emailId, totalNumberOfHours, comments, managerName, status, id, ...displayData } = formData;
+  const {
+    emailId,
+    totalNumberOfHours,
+    comments,
+    managerName,
+    status,
+    id,
+    ...displayData
+  } = formData;
 
   return (
     <Container>
@@ -57,17 +67,26 @@ const TimesheetSubmission = ({ setSubmissions }) => {
               {Object.entries(displayData).map(([key, value]) => (
                 <tr key={key}>
                   <td>{key.charAt(0).toUpperCase() + key.slice(1)}</td>
-                  <td>{key === 'onCallSupport' ? (value === 'true' || value === true ? 'Yes' : 'No') : value !== undefined ? value : 'N/A'}
+                  <td>
+                    {key === "onCallSupport"
+                      ? value === "true" || value === true
+                        ? "Yes"
+                        : "No"
+                      : value !== undefined
+                        ? value
+                        : "N/A"}
                   </td>
                 </tr>
               ))}
             </tbody>
           </Table>
           <p className="text-red-600">{errors}</p>
-          <Button onClick={handleBackToForm} variant="primary" className="m-3">Back to Form</Button>
-          <Button 
-            onClick={handleSubmitToHome} 
-            variant="secondary" 
+          <Button onClick={handleBackToForm} variant="primary" className="m-3">
+            Back to Form
+          </Button>
+          <Button
+            onClick={handleSubmitToHome}
+            variant="secondary"
             className="m-2 font-bold text-white transition duration-500 bg-gradient-to-r from-red-500 to-orange-400 shadow-lg hover:bg-right-50 active:scale-95"
           >
             Submit and Return Home
